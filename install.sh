@@ -77,9 +77,9 @@ cat /lumi/conf/wifi.conf
 
 echo
 echo =================================================================
-echo ZESP32 installation completed. Device will restart in 10 seconds.
+echo ZESP32 installation completed. Device will restart in 15 seconds.
 echo Press Ctrl+C to cancel automatic restart.
 echo =================================================================
-sleep 10
+sleep 15
 
-#reboot
+reboot
