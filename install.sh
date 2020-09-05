@@ -10,6 +10,11 @@ w_get() {
     echo -e "GET $2 HTTP/1.0\nHost: $1\n" | openssl s_client -quiet -connect $1:443 2>/dev/null | sed '1,/^\r$/d' > $3
 }
 
+echo =================================================================
+echo ZESP32 automatic installer
+echo =================================================================
+
+echo
 echo Updating time...
 ntpdate pool.ntp.org
 
@@ -45,7 +50,7 @@ echo Found $MODULE
 
 echo
 echo Downloading utils...
-WORKDIR=$(mktemp)
+WORKDIR=$(mktemp -d)
 mkdir -p $UTILS_DIR
 w_get $UTILS_HOST $UTILS_URL $WORKDIR/master.zip
 if ! unzip $WORKDIR/master.zip -d $WORKDIR; then
