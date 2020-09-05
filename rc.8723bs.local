@@ -1,0 +1,40 @@
+#!/bin/sh -e
+
+cd /home/root
+
+#insmod /home/root/8189es.ko
+insmod /home/root/8723bs.ko
+
+echo 30000 >  /proc/sys/vm/min_free_kbytes
+echo 2 >/proc/sys/kernel/printk
+echo -e "\033[9;0]" > /dev/tty0
+echo 0 > /sys/bus/platform/drivers/imx_busfreq/soc\:busfreq/enable
+
+# Starting boot, blink blue
+/opt/utils/blink.sh blue || true
+
+/home/root/set_mac.sh || true
+
+# Update zigbee
+/opt/utils/zota.sh || true
+
+# Starting wifi, blink magenta
+/opt/utils/blink.sh magenta || true
+
+# WiFi
+/opt/utils/wifi_start.sh > /dev/null 2>&1 &
+
+# SSH
+/etc/init.d/dropbear start &
+
+echo "===================================="
+echo "========== start zesp32============="
+echo "===================================="
+# Starting app, blink green
+/opt/utils/blink.sh green || true
+
+cd /opt/app
+/opt/app/start.sh &
+
+####################################################
+exit 0
