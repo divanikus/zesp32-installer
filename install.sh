@@ -4,6 +4,7 @@ UTILS_HOST=codeload.github.com
 UTILS_URL=/divanikus/zesp32-installer/zip/master
 UTILS_DIR=/opt/utils
 PKG_URL=http://82.146.46.112/fw/mihub.tar.gz
+PKG_UPD_URL=http://82.146.46.112/fw/update.tar.gz
 PKG=/tmp/m.tgz
 
 w_get() {
@@ -34,6 +35,21 @@ fi
 rm $PKG
 ln -fs /opt/node/bin/npm /usr/bin/npm
 ln -fs /opt/node/bin/node /usr/bin/node
+
+echo
+echo Downloading update...
+if ! wget -O $PKG $PKG_UPD_URL; then
+    echo Download failed.
+    exit -1
+fi
+
+echo
+echo Unpacking update...
+if ! tar -xzvf $PKG -C /; then
+    echo Unpacking failed, please check available space and try again.
+    exit -1
+fi
+rm $PKG
 
 echo
 echo Detecting Wifi module...
