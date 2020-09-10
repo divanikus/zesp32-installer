@@ -21,6 +21,8 @@ if [ -f "/opt/app/util/need_update_coordinator.tag" ];then
         echo 10 > /sys/class/backlight/lumi_g/brightness
         echo 0 > /sys/class/backlight/lumi_b/brightness
     else
+        echo "update zigbee coordinator failed:"
+        cat /tmp/update_coordinator.log
         echo 0 > /sys/class/backlight/lumi_r/brightness
         echo 0 > /sys/class/backlight/lumi_g/brightness
         echo 10 > /sys/class/backlight/lumi_b/brightness

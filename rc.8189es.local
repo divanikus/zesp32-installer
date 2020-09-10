@@ -18,6 +18,9 @@ echo 0 > /sys/bus/platform/drivers/imx_busfreq/soc\:busfreq/enable
 # Update zigbee
 /opt/utils/zota.sh || true
 
+# Starting button evtest
+/opt/app/util/tb.sh &
+
 # Starting wifi, blink magenta
 /opt/utils/blink.sh magenta || true
 
