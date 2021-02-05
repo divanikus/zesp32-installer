@@ -15,6 +15,12 @@ echo =================================================================
 echo ZESP32 automatic installer
 echo =================================================================
 
+if [ ! -d "/lumi" ]; then
+    echo
+    echo This script is intended to run only on stock firmware.
+    exit -1
+fi
+
 echo
 echo Updating time...
 ntpdate pool.ntp.org
