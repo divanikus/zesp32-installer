@@ -8,7 +8,7 @@ PKG_UPD_URL=http://82.146.46.112/fw/update.tar.gz
 PKG=/tmp/m.tgz
 
 w_get() {
-    echo -e "GET $2 HTTP/1.0\nHost: $1\n" | openssl s_client -quiet -connect $1:443 2>/dev/null | sed '1,/^\r$/d' > $3
+    echo -e "GET $2 HTTP/1.0\nHost: $1\n" | openssl s_client -quiet -connect $1:443 -servername $1 2>/dev/null | sed '1,/^\r$/d' > $3
 }
 
 echo =================================================================
